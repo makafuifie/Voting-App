@@ -40,12 +40,14 @@
 (function(){
 	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 	function onDeviceReady() {
-		barcodeScanner();
+		document.getElementById("barcode").onclick = barcodeScanner();
 	};
-	function barcodeScanner(){
-	//alert("success")
-	 cordova.plugins.barcodeScanner.scan(
-      function (result) {
+		function onDeviceReady() {
+		
+
+		document.getElementById("barcode").onclick = function() {
+			cordova.plugins.barcodeScanner.scan(
+      		function (result) {
           alert("We got a barcode\n" +
                 "Result: " + result.text + "\n" +
                 "Format: " + result.format + "\n" +
@@ -55,6 +57,14 @@
           alert("Scanning failed: " + error);
       }
    );
+		}
+		  
+		  
+	
+	};
+	function barcodeScanner(){
+	//alert("success")
+	 
 }
 
 })();
