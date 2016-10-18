@@ -14,27 +14,14 @@
 				destinationType : destinationType.DATA_URL
 			});
 		}
-		document.getElementById("geolocation").onclick = function() {
-			navigator.geolocation.watchPosition(geolocationSuccess, geolocationFail, {enableHighAccuracy:true});
-		}
+		
 		
 		  
 		  
 	
 	};
 
-	function geolocationSuccess(position){
-		var geoElement = document.getElementById('geolocation');
-		geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
-								'Longitude: '+position.coords.longitude +'<br />'+
-								'<hr />'+element.innerHTML;
-	}
-
-function geolocationFail(error){
-	alert('code: '+ error.code + '\n'+
-		'message: '+error.message+ '\n');
-}
-
+	
 	function onPhotoDataSuccess(imageData) {
 
 		var smallImage = document.getElementById('smallImage');
@@ -56,44 +43,50 @@ function geolocationFail(error){
 
 (function(){
 	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
-	function onDeviceReady() {
-		document.getElementById("barcode").onclick = barcodeScanner();
-	};
+	
+		
 		function onDeviceReady() {
 		
-
-		document.getElementById("barcode").onclick = function() {
-			cordova.plugins.barcodeScanner.scan(
-      		function (result) {
-          alert("We got a barcode\n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
-      },
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
-   );
+document.getElementById("capturePhoto").onclick = function() {
+			navigator.geolocation.watchPosition(geolocationSuccess, geolocationFail, {
+				maximumAge: 3000, timeout: 10000, enableHighAccuracy: true 
+			});
+		
+  
 		}
 		  
 		  
 	
 	};
+	function geolocationSuccess(position){
+		//var geoElement = document.getElementById('geolocation');
+		alert('Latitude: '+position.coords.latitude+ '\n'+
+								'Longitude: '+position.coords.longitude +'\n');
+								
+		// geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
+		// 						'Longitude: '+position.coords.longitude +'<br />'+
+		// 						'<hr />'+element.innerHTML;
+	}
+
+function geolocationFail(error){
+	alert('code: '+ error.code + '\n'+
+		'message: '+error.message+ '\n');
+}
+
+
 	
 	 
 }
 
-})();
+)();
 
 (function(){
 	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
-	function onDeviceReady() {
-		document.getElementById("geolocation").onclick = barcodeScanner();
-	};
+	
 		function onDeviceReady() {
 		
 
-		document.getElementById("barcode").onclick = function() {
+		document.getElementById("geolocation").onclick = barcodeScanner(); = function() {
 			cordova.plugins.barcodeScanner.scan(
       		function (result) {
           alert("We got a barcode\n" +
