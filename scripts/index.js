@@ -14,6 +14,15 @@
 				destinationType : destinationType.DATA_URL
 			});
 		}
+		// document.getElementById("barcode").onclick = barcodeScanner();
+		// document.getElementById("geolocation").onclick=function(){
+		// 	navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+		// }
+		// document.getElementById("watch").onclick = function() {
+		// 	navigator.geolocation.watchPosition(geolocationSuccess, geolocationFail, {
+		// 		maximumAge: 3000, timeout: 10000, enableHighAccuracy: true 
+		// 	});
+		// }
 		  
 		  
 	
@@ -33,5 +42,138 @@
 		alert('Failed because: ' + message);
 
 	}
+	// function barcodeScanner(){
+	// 	cordova.plugins.barcodeScanner.scan(
+	// 			function (result) {
+	// 				alert("We got a barcode\n" +
+	// 					"Result: " + result.text + "\n" +
+	// 					"Format: " + result.format + "\n" +
+	// 					"Cancelled: " + result.cancelled);
+	// 			},
+	// 			function (error) {
+	// 				alert("Scanning failed: " + error);
+	// 			}
+	// 			);
+	// 	}
+		
+		
+		
+	// function onPositionSuccess(position){
+	// 	var geoElement = document.getElementById('geolocation');
+	// 	// alert('Latitude: '+position.coords.latitude+ '\n'+
+	// 	// 	'Longitude: '+position.coords.longitude +'\n');
+		
+	// 	 geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
+	// 	 						'Longitude: '+position.coords.longitude +'<br />'+
+	// 							'<hr />'+geoElement.innerHTML;
+	// }
+
+	// function onPositionError(error){
+	// 	alert('code: '+ error.code + '\n'+
+	// 		'message: '+error.message+ '\n');
+	// }
+
+	// function geolocationSuccess(position){
+	// 	var geoElement = document.getElementById('watch');
+	// 	// alert('Latitude: '+position.coords.latitude+ '\n'+
+	// 	// 	'Longitude: '+position.coords.longitude +'\n');
+		
+	// 	geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
+	// 							'Longitude: '+position.coords.longitude +'<br />'+
+	// 							'<hr />'+geoElement.innerHTML;
+	// }
+
+	// function geolocationFail(error){
+	// 	alert('code: '+ error.code + '\n'+
+	// 		'message: '+error.message+ '\n');
+	// }
 
 })();
+
+(function(){
+	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+	
+	function onDeviceReady() {
+		
+
+		document.getElementById("barcode").onclick = function() {
+			cordova.plugins.barcodeScanner.scan(
+				function (result) {
+					alert("We got a barcode\n" +
+						"Result: " + result.text + "\n" +
+						"Format: " + result.format + "\n" +
+						"Cancelled: " + result.cancelled);
+				},
+				function (error) {
+					alert("Scanning failed: " + error);
+				}
+				);
+		}
+		
+		
+		
+	};
+	
+	
+}
+
+)();
+(function(){
+	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+	
+	
+	function onDeviceReady() {
+		
+		document.getElementById("geolocation").onclick=function(){
+			navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+		}
+
+	};
+	function onPositionSuccess(position){
+		var geoElement = document.getElementById('geolocation');
+		// alert('Latitude: '+position.coords.latitude+ '\n'+
+		// 	'Longitude: '+position.coords.longitude +'\n');
+		
+		geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
+								'Longitude: '+position.coords.longitude +'<br />'+
+								'<hr />'+geoElement.innerHTML;
+	}
+
+	function onPositionError(error){
+		alert('code: '+ error.code + '\n'+
+			'message: '+error.message+ '\n');
+	}
+}
+
+)();
+
+(function(){
+	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+	
+	
+	function onDeviceReady() {
+		
+		document.getElementById("watch").onclick = function() {
+			navigator.geolocation.watchPosition(geolocationSuccess, geolocationFail, {
+				maximumAge: 3000, timeout: 10000, enableHighAccuracy: true 
+			});
+		}
+
+	};
+	function geolocationSuccess(position){
+		var geoElement = document.getElementById('watch');
+		// alert('Latitude: '+position.coords.latitude+ '\n'+
+		// 	'Longitude: '+position.coords.longitude +'\n');
+		
+		geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
+								'Longitude: '+position.coords.longitude +'<br />'+
+								'<hr />'+geoElement.innerHTML;
+	}
+
+	function geolocationFail(error){
+		alert('code: '+ error.code + '\n'+
+			'message: '+error.message+ '\n');
+	}
+}
+
+)();
