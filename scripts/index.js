@@ -125,24 +125,37 @@
 	function onDeviceReady() {
 		
 		document.getElementById("geolocation").onclick=function(){
-			navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError);
+			navigator.geolocation.getCurrentPosition(onPositionSuccess, onPositionError, {timeout: 30000});
 		}
 
 	};
 	function onPositionSuccess(position){
-		var geoElement = document.getElementById('geolocation');
-		// alert('Latitude: '+position.coords.latitude+ '\n'+
-		// 	'Longitude: '+position.coords.longitude +'\n');
+		//var geoElement = document.getElementById('geolocation');
+		//alert('Latitude: '+position.coords.latitude+ '\n'+
+		 	//'Longitude: '+position.coords.longitude +'\n');
 		
-		geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
-								'Longitude: '+position.coords.longitude +'<br />'+
-								'<hr />'+geoElement.innerHTML;
+		// geoElement.innerHTML = 'Latitude: '+position.coords.latitude+ '<br />'+
+		// 						'Longitude: '+position.coords.longitude +'<br />'+
+		// 						'<hr />'+geoElement.innerHTML;
+
+		var lat  =position.coords.latitude;
+		var long  = position.coords.longitude;
+
+		//Google maps
+
+		var myLatlng = new google.maps.LatLng(lat,lang);
+		var mapOptions = {zoom:4, center:myLatlng};
+		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		var marker = new google.maps.Marker({position:myLatlng, map:map});
+
 	}
 
 	function onPositionError(error){
 		alert('code: '+ error.code + '\n'+
 			'message: '+error.message+ '\n');
 	}
+
+	google.maps.event.addDomListener(window, 'load', onPositionSuccess);
 }
 
 )();
