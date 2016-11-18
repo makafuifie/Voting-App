@@ -4,9 +4,9 @@
 	var pictureSource;
 	var destinationType;
 	function onDeviceReady() {
-		// pictureSource = navigator.camera.PictureSourceType;
-		// destinationType = navigator.camera.DestinationType;
-console.log("hello");
+		pictureSource = navigator.camera.PictureSourceType;
+		destinationType = navigator.camera.DestinationType;
+		console.log("hello");
 		document.getElementById("capturePhoto").onclick = function() {
 			console.log("hello");
 			navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
@@ -35,4 +35,33 @@ console.log("hello");
 
 	}
 
+})();
+
+
+(function(){
+	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+	
+	function onDeviceReady() {
+		
+
+		document.getElementById("barcode").onclick = function() {
+			console.log("hdf");
+			cordova.plugins.barcodeScanner.scan(
+				function (result) {
+					alert("We got a barcode\n" +
+						"Result: " + result.text + "\n" +
+						"Format: " + result.format + "\n" +
+						"Cancelled: " + result.cancelled);
+				},
+				function (error) {
+					alert("Scanning failed: " + error);
+				}
+				);
+		}
+		
+		
+		
+	};
+	
+	
 })();
