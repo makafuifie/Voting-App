@@ -1,9 +1,10 @@
-﻿(function() {
+﻿// (function() {
 
 	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 	var pictureSource;
 	var destinationType;
 	function onDeviceReady() {
+		alert("fgf");
 		pictureSource = navigator.camera.PictureSourceType;
 		destinationType = navigator.camera.DestinationType;
 		console.log("hello");
@@ -14,11 +15,25 @@
 
 				destinationType : destinationType.DATA_URL
 			});
-		}
-		  
+		};
+		 document.getElementById("barcode").onclick = function() {
+			console.log("hdf");
+			cordova.plugins.barcodeScanner.scan(
+				function (result) {
+					alert("We got a barcode\n" +
+						"Result: " + result.text + "\n" +
+						"Format: " + result.format + "\n" +
+						"Cancelled: " + result.cancelled);
+				},
+				function (error) {
+					alert("Scanning failed: " + error);
+				}
+				);
+		}; 
 		  
 	
-	};
+	}
+	
 	function onPhotoDataSuccess(imageData) {
 
 		var smallImage = document.getElementById('smallImage');
@@ -35,33 +50,20 @@
 
 	}
 
-})();
+// })();
 
 
-(function(){
-	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
+// (function(){
+// 	document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 	
-	function onDeviceReady() {
+// 	function onDeviceReady() {
 		
 
-		document.getElementById("barcode").onclick = function() {
-			console.log("hdf");
-			cordova.plugins.barcodeScanner.scan(
-				function (result) {
-					alert("We got a barcode\n" +
-						"Result: " + result.text + "\n" +
-						"Format: " + result.format + "\n" +
-						"Cancelled: " + result.cancelled);
-				},
-				function (error) {
-					alert("Scanning failed: " + error);
-				}
-				);
-		}
 		
 		
 		
-	};
+		
+// 	};
 	
 	
-})();
+// })();
